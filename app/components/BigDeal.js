@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'; // Import useRouter
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { AiOutlineClose } from 'react-icons/ai';
-
+import Image from 'next/image';
 export default function BigDeal() {
   const router = useRouter(); // Initialize router
 
@@ -171,13 +171,13 @@ export default function BigDeal() {
             className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => handleProductClick(cat)} // Navigate on click
           >
-            <img
+            <Image
               src={cat.image}
               alt={cat.name}
               className="h-auto w-full object-cover mb-4 rounded-md"
             />
             <div>
-              <img
+              <Image
                 src={cat.review}
                 alt="Review"
                 className="h-auto w-full object-cover mb-2 rounded-md"

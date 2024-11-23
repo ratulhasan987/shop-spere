@@ -3,7 +3,7 @@ import Header from '@/app/components/Header';
 import NewArrival from '@/app/components/NewArrival';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
+import Image from 'next/image';
 export default function ProductDetails() {
   const router = useRouter();
   const { id, gallery, reviews } = router.query;
@@ -48,14 +48,14 @@ export default function ProductDetails() {
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Product Gallery */}
           <div className="flex-1">
-            <img
+            <Image
               src={productGallery[0]}
               alt={product.name}
               className="w-full md:h-96 h-auto object-cover rounded-lg mb-4"
             />
             <div className="flex space-x-4 overflow-x-auto mb-6">
               {productGallery.map((image, index) => (
-                <img
+                <Image
                   key={index}
                   src={image}
                   alt={`Gallery Image ${index + 1}`}
@@ -71,18 +71,21 @@ export default function ProductDetails() {
               New Arrival
             </h1>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <img src="/images/Frame 73.png" alt="" className="mb-4" />
+            <Image src="/images/Frame 73.png" alt="" className="mb-4" />
             <p className="text-lg font-bold mb-4">BDT {product.price}</p>
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Available Size */}
               <div>
                 <h3 className="text-lg mb-2">Available Size</h3>
                 <div className="flex gap-4 flex-wrap">
-                  {product.sizes.map((size) => (
+                  {product.sizes.map(size => (
                     <button
                       key={size}
-                      className={`px-2 py-1 border rounded-lg ${selectedSize === size ? 'bg-purple-900 text-white' : 'bg-white text-black'
-                        }`}
+                      className={`px-2 py-1 border rounded-lg ${
+                        selectedSize === size
+                          ? 'bg-purple-900 text-white'
+                          : 'bg-white text-black'
+                      }`}
                       onClick={() => handleSizeChange(size)}
                     >
                       {size}
@@ -94,8 +97,11 @@ export default function ProductDetails() {
               <div>
                 <h3 className="text-lg mb-2">Available Color</h3>
                 <div className="flex gap-4">
-                  {product.colors.map((color) => (
-                    <label key={color} className="flex items-center gap-2 cursor-pointer">
+                  {product.colors.map(color => (
+                    <label
+                      key={color}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input
                         type="radio"
                         name="color"
@@ -105,8 +111,11 @@ export default function ProductDetails() {
                         className="hidden"
                       />
                       <div
-                        className={`w-5 h-5 border rounded-full ${selectedColor === color ? 'ring-2 ring-purple-900' : ''
-                          }`}
+                        className={`w-5 h-5 border rounded-full ${
+                          selectedColor === color
+                            ? 'ring-2 ring-purple-900'
+                            : ''
+                        }`}
                         style={{ backgroundColor: color.toLowerCase() }}
                       />
                       <span className="capitalize">{color}</span>
@@ -164,13 +173,13 @@ export default function ProductDetails() {
               <p>No reviews yet.</p>
             )}
           </div>
-          <img src="/images/reviewImage.png" alt="Reviews" className="h-36" />
+          <Image src="/images/reviewImage.png" alt="Reviews" className="h-36" />
         </div>
       </div>
       <div className="py-10">
-      <NewArrival />
+        <NewArrival />
       </div>
-      <Contact/>
+      <Contact />
     </>
   );
 }

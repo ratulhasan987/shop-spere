@@ -1,5 +1,5 @@
 import Button from "./Button";
-
+import Image from 'next/image';
 export default function Discount() {
   return (
     <div className="bg-primary-100 py-8 container mx-auto ">
@@ -12,12 +12,13 @@ export default function Discount() {
           <p className="text-gray-500 mt-2 mb-2">
             Hurry up! Offer valid for a limited time.
           </p>
-          <div className="flex justify-center"><Button/></div>
-          
+          <div className="flex justify-center">
+            <Button />
+          </div>
         </div>
 
         <div className="md:w-1/2 w-full">
-          <img
+          <Image
             src="/images/DiscountImage.png" // Replace with the correct image path
             alt="Discount Offer"
             className=""

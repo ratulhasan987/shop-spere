@@ -2,6 +2,7 @@ import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +33,7 @@ export default function Header() {
         onClick={handleHomeClick}
         className="flex items-center gap-2 cursor-pointer"
       >
-        <img
+        <Image
           src="/images/wf_1.png"
           alt="wf_1"
           className="md:w-16 md:h-12 w-10 h-8"
@@ -51,8 +52,9 @@ export default function Header() {
         <ul className="flex flex-col md:flex-row md:gap-6">
           <li>
             <a
-               onClick={handleHomeClick}
-               className="text-purple-600 cursor-pointer">
+              onClick={handleHomeClick}
+              className="text-purple-600 cursor-pointer"
+            >
               Home
             </a>
           </li>
@@ -68,7 +70,7 @@ export default function Header() {
           </li>
           <li>
             <a href="#" className="hover:text-black">
-              What's New
+              Whats New
             </a>
           </li>
         </ul>

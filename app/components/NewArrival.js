@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-
+import Image from 'next/image';
 export default function NewArrival() {
   const router = useRouter();
 
@@ -180,7 +180,7 @@ export default function NewArrival() {
             className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => handleProductClick(cat)}
           >
-            <img
+            <Image
               src={cat.image}
               alt={cat.name}
               className="h-auto w-full object-cover mb-4 rounded-md"
