@@ -51,6 +51,8 @@ export default function ProductDetails() {
             <Image
               src={productGallery[0]}
               alt={product.name}
+              width={500} // Specify width
+              height={500} // Specify height
               className="w-full md:h-96 h-auto object-cover rounded-lg mb-4"
             />
             <div className="flex space-x-4 overflow-x-auto mb-6">
@@ -59,6 +61,8 @@ export default function ProductDetails() {
                   key={index}
                   src={image}
                   alt={`Gallery Image ${index + 1}`}
+                  width={128} // Thumbnail width
+                  height={128} // Thumbnail height
                   className="w-32 h-32 object-cover rounded-lg"
                 />
               ))}
@@ -71,7 +75,13 @@ export default function ProductDetails() {
               New Arrival
             </h1>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <Image src="/images/Frame 73.png" alt="" className="mb-4" />
+            <Image
+              src="/images/Frame 73.png"
+              alt="Rating"
+              width={100}
+              height={20}
+              className="mb-4"
+            />
             <p className="text-lg font-bold mb-4">BDT {product.price}</p>
             <div className="flex flex-col lg:flex-row gap-6">
               {/* Available Size */}
@@ -173,7 +183,12 @@ export default function ProductDetails() {
               <p>No reviews yet.</p>
             )}
           </div>
-          <Image src="/images/reviewImage.png" alt="Reviews" className="h-36" />
+          <Image
+            src="/images/reviewImage.png"
+            alt="Reviews"
+            width={200}
+            height={200}
+          />
         </div>
       </div>
       <div className="py-10">

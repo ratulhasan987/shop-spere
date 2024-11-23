@@ -41,14 +41,14 @@ export default function BigDeal() {
     },
     {
       id: 3,
-      image: '/images/Woman Wearing Sari.png',
+      image: '/images/WomanWearingsSharee.png',
       review: '/images/Frame 17.png',
-      name: 'Half Sleeve Shirt',
+      name: 'Woman Wearing Sharee',
       price: 2300,
       gallery: [
-        '/images/Woman Wearing Sari.png',
-        '/images/Woman Wearing Sari.png',
-        '/images/Woman Wearing Sari.png',
+        '/images/WomanWearingsSharee.png',
+        '/images/WomanWearingsSharee.png',
+        '/images/WomanWearingsSharee.png',
       ],
       reviews: [
         { user: 'John', rating: 4, comment: 'Great product!' },
@@ -59,7 +59,7 @@ export default function BigDeal() {
       id: 4,
       image: '/images/CheckeredShirt.png',
       review: '/images/Frame 17.png',
-      name: 'Half Sleeve Shirt',
+      name: 'Checkerd Shirt',
       price: 2300,
       gallery: [
         '/images/CheckeredShirt.png',
@@ -75,7 +75,7 @@ export default function BigDeal() {
       id: 5,
       image: '/images/Plazu.png',
       review: '/images/Frame 17.png',
-      name: 'Half Sleeve Shirt',
+      name: 'Plazu',
       price: 2300,
       gallery: ['/images/Plazu.png', '/images/Plazu.png', '/images/Plazu.png'],
       reviews: [
@@ -171,17 +171,24 @@ export default function BigDeal() {
             className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow cursor-pointer"
             onClick={() => handleProductClick(cat)} // Navigate on click
           >
-            <Image
-              src={cat.image}
-              alt={cat.name}
-              className="h-auto w-full object-cover mb-4 rounded-md"
-            />
             <div>
+              <Image
+                src={cat.image}
+                alt={cat.name}
+                layout="responsive"
+                width={300} 
+                height={300}
+                className="h-auto w-full object-cover mb-4 rounded-md"
+              />
+
               <Image
                 src={cat.review}
                 alt="Review"
+                width={200} 
+                height={50} 
                 className="h-auto w-full object-cover mb-2 rounded-md"
               />
+
               <div className="flex justify-between items-center">
                 <p className="text-lg font-medium">{cat.name}</p>
                 <p className="text-gray-600">BDT {cat.price}</p>

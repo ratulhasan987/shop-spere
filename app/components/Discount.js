@@ -19,7 +19,9 @@ export default function Discount() {
 
         <div className="md:w-1/2 w-full">
           <Image
-            src="/images/DiscountImage.png" // Replace with the correct image path
+            src="/images/DiscountImage.png"
+            width={640}
+            height={480}
             alt="Discount Offer"
             className=""
           />

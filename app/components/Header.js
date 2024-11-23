@@ -36,8 +36,11 @@ export default function Header() {
         <Image
           src="/images/wf_1.png"
           alt="wf_1"
+          width={64}
+          height={48}
           className="md:w-16 md:h-12 w-10 h-8"
         />
+
         <span className="text-xl font-bold text-black">
           <span className="text-purple-600">We</span>5ive
         </span>

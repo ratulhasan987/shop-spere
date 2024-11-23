@@ -7,6 +7,8 @@ export default function MenCollection() {
         <Image
           src="/images/MenImage.png"
           alt="Men Collection"
+          width={500} 
+          height={500}
           className="h-auto w-auto object-cover"
         />
       </div>

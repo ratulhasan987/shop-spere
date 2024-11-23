@@ -183,6 +183,9 @@ export default function NewArrival() {
             <Image
               src={cat.image}
               alt={cat.name}
+              layout="responsive"
+              width={300} 
+              height={300}
               className="h-auto w-full object-cover mb-4 rounded-md"
             />
             <div className="flex justify-between items-center">
