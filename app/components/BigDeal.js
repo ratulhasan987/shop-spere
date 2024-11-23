@@ -1,17 +1,27 @@
-
 import { useState, useEffect } from 'react';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'; // React Icons
-import { AiOutlineClose } from 'react-icons/ai'; // Close Icon for the modal
+import { useRouter } from 'next/router'; // Import useRouter
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default function BigDeal() {
-  // Hardcoded category data
-  const categories = [
+  const router = useRouter(); // Initialize router
+
+  const products = [
     {
       id: 1,
       image: '/images/IndianShorts.png',
       review: '/images/Frame 17.png',
       name: 'Indian Shorts',
       price: 2300,
+      gallery: [
+        '/images/IndianShorts.png',
+        '/images/IndianShorts.png',
+        '/images/IndianShorts.png',
+      ],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
     {
       id: 2,
@@ -19,87 +29,109 @@ export default function BigDeal() {
       review: '/images/Frame 17.png',
       name: 'Half Sleeve Shirt',
       price: 2300,
+      gallery: [
+        '/images/HalfShirt.png',
+        '/images/HalfShirt.png',
+        '/images/HalfShirt.png',
+      ],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
     {
       id: 3,
-      image: '/images/Woman wearing sari.png',
+      image: '/images/Woman Wearing Sari.png',
       review: '/images/Frame 17.png',
-      name: 'Woman wearing sari',
-      price: 3000,
+      name: 'Half Sleeve Shirt',
+      price: 2300,
+      gallery: [
+        '/images/Woman Wearing Sari.png',
+        '/images/Woman Wearing Sari.png',
+        '/images/Woman Wearing Sari.png',
+      ],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
     {
       id: 4,
-      image: '/images/Checkeredshirt.png',
+      image: '/images/CheckeredShirt.png',
       review: '/images/Frame 17.png',
-      name: 'Checkered shirt',
+      name: 'Half Sleeve Shirt',
       price: 2300,
+      gallery: [
+        '/images/CheckeredShirt.png',
+        '/images/CheckeredShirt.png',
+        '/images/CheckeredShirt.png',
+      ],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
     {
       id: 5,
-      image: '/images/plazu.png',
+      image: '/images/Plazu.png',
       review: '/images/Frame 17.png',
-      name: 'Plazu',
+      name: 'Half Sleeve Shirt',
       price: 2300,
+      gallery: ['/images/Plazu.png', '/images/Plazu.png', '/images/Plazu.png'],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
     {
       id: 6,
-      image: '/images/IndianShorts.png',
-      review: '/images/Frame 17.png',
-      name: 'Indian Shorts',
-      price: 2300,
-    },
-    {
-      id: 7,
       image: '/images/halfShirt.png',
       review: '/images/Frame 17.png',
       name: 'Half Sleeve Shirt',
       price: 2300,
-    },
-    {
-      id: 8,
-      image: '/images/Woman wearing sari.png',
-      review: '/images/Frame 17.png',
-      name: 'Woman wearing sari',
-      price: 3000,
+      gallery: [
+        '/images/HalfShirt.png',
+        '/images/HalfShirt.png',
+        '/images/HalfShirt.png',
+      ],
+      reviews: [
+        { user: 'John', rating: 4, comment: 'Great product!' },
+        { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
+      ],
     },
   ];
 
-  // State for the current index of the slider
   const [startIndex, setStartIndex] = useState(0);
-
-  // State to control the "See More" modal visibility
   const [showModal, setShowModal] = useState(false);
-
-  // State for detecting mobile vs desktop
   const [isMobile, setIsMobile] = useState(false);
 
-  // Number of items to display per slide (default to 4 for desktop)
-  const itemsPerSlide = 4;
+  const itemsPerSlide = isMobile ? 1 : 4;
 
-  // Handle screen resizing to detect mobile or desktop size
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768); // Update isMobile based on screen width
-    };
-
-    checkScreenSize(); // Check screen size initially
-
-    // Add event listener for resizing
-    window.addEventListener('resize', checkScreenSize);
-
-    // Cleanup the event listener
-    return () => window.removeEventListener('resize', checkScreenSize);
+    const updateScreenSize = () => setIsMobile(window.innerWidth < 768);
+    updateScreenSize();
+    window.addEventListener('resize', updateScreenSize);
+    return () => window.removeEventListener('resize', updateScreenSize);
   }, []);
 
-  // Set the number of visible items per slide based on screen size
-  const visibleItems = isMobile ? 1 : itemsPerSlide;
-
-  // Slide navigation functions
-  const slideLeft = () => setStartIndex(Math.max(startIndex - visibleItems, 0));
+  const slideLeft = () =>
+    setStartIndex(Math.max(startIndex - itemsPerSlide, 0));
   const slideRight = () =>
     setStartIndex(
-      Math.min(startIndex + visibleItems, categories.length - visibleItems)
+      Math.min(startIndex + itemsPerSlide, products.length - itemsPerSlide)
     );
+
+  // Navigate to product details page
+  const handleProductClick = product => {
+    router.push({
+      pathname: `/product/[id]`,
+      query: {
+        id: product.id,
+        gallery: JSON.stringify(product.gallery),
+        reviews: JSON.stringify(product.reviews),
+      },
+    });
+  };
 
   return (
     <div className="my-8 relative container mx-auto md:px-0 px-4">
@@ -121,37 +153,34 @@ export default function BigDeal() {
         <button
           onClick={slideRight}
           className={`bg-gray-200 p-2 rounded-full hover:bg-gray-300 shadow ${
-            startIndex + visibleItems >= categories.length
+            startIndex + itemsPerSlide >= products.length
               ? 'cursor-not-allowed opacity-50'
               : ''
           }`}
-          disabled={startIndex + visibleItems >= categories.length}
+          disabled={startIndex + itemsPerSlide >= products.length}
         >
           <FiArrowRight size={20} />
         </button>
       </div>
 
-      {/* Category Grid */}
-      <div
-        className={`grid grid-cols-${
-          isMobile ? '1' : '4'
-        } gap-4 mt-8 transition-transform`}
-      >
-        {categories.slice(startIndex, startIndex + visibleItems).map(cat => (
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-8 transition-transform">
+        {products.slice(startIndex, startIndex + itemsPerSlide).map(cat => (
           <div
             key={cat.id}
-            className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow"
+            className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow cursor-pointer"
+            onClick={() => handleProductClick(cat)} // Navigate on click
           >
             <img
               src={cat.image}
               alt={cat.name}
-              className="h-auto w-full object-cover mb-4"
+              className="h-auto w-full object-cover mb-4 rounded-md"
             />
             <div>
               <img
                 src={cat.review}
-                alt={cat.name}
-                className="h-auto w-full object-cover mb-4"
+                alt="Review"
+                className="h-auto w-full object-cover mb-2 rounded-md"
               />
               <div className="flex justify-between items-center">
                 <p className="text-lg font-medium">{cat.name}</p>
@@ -168,7 +197,7 @@ export default function BigDeal() {
       {/* See More Button */}
       <div className="flex justify-center mt-6">
         <button
-          onClick={() => setShowModal(true)} // Open modal
+          onClick={() => setShowModal(true)}
           className="px-6 py-2 bg-purple-500 text-white rounded hover:bg-purple-700"
         >
           See more
@@ -181,7 +210,7 @@ export default function BigDeal() {
           <div className="bg-white rounded-lg p-6 w-3/4 max-w-lg shadow-lg relative">
             {/* Close Button */}
             <button
-              onClick={() => setShowModal(false)} // Close modal
+              onClick={() => setShowModal(false)}
               className="absolute top-4 right-4 text-gray-600 hover:text-black"
             >
               <AiOutlineClose size={24} />
@@ -189,16 +218,14 @@ export default function BigDeal() {
 
             <h3 className="text-xl font-semibold mb-4">More Products</h3>
             <p className="text-gray-700">
-              Explore more products in our collection. This could lead to a new
-              page or showcase additional items.
+              Explore more products in our collection. Click below to see all.
             </p>
 
             <div className="flex justify-center mt-4">
               <button
                 onClick={() => {
-                  // Navigate to another page or load more data
+                  console.log('Navigating to more products...');
                   setShowModal(false);
-                  console.log('Navigate to more products...');
                 }}
                 className="px-6 py-2 bg-purple-500 text-white rounded hover:bg-purple-700"
               >

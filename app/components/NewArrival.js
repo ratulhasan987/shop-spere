@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
@@ -6,7 +5,10 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 export default function NewArrival() {
   const router = useRouter();
 
-  const categories = [
+  // Determine titles based on the current route
+  const isHomePage = router.pathname === '/';
+  // products data
+  const products = [
     {
       id: 1,
       image: '/images/hodiee.png',
@@ -91,10 +93,12 @@ export default function NewArrival() {
     },
   ];
 
+  // State for slider and screen size
   const [startIndex, setStartIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const itemsPerSlide = 4;
+  // Determine items per slide based on screen size
+  const itemsPerSlide = isMobile ? 1 : 4;
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -105,34 +109,47 @@ export default function NewArrival() {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const visibleItems = isMobile ? 1 : itemsPerSlide;
-
-  const slideLeft = () => setStartIndex(Math.max(startIndex - visibleItems, 0));
+  // Slider controls
+  const slideLeft = () =>
+    setStartIndex(Math.max(startIndex - itemsPerSlide, 0));
   const slideRight = () =>
     setStartIndex(
-      Math.min(startIndex + visibleItems, categories.length - visibleItems)
+      Math.min(startIndex + itemsPerSlide, products.length - itemsPerSlide)
     );
 
-  // Navigate to Product Details page with gallery and reviews
+  // Navigate to product details page
   const handleProductClick = product => {
     router.push({
       pathname: `/product/[id]`,
       query: {
         id: product.id,
-        gallery: JSON.stringify(product.gallery), // Pass gallery as JSON string
-        reviews: JSON.stringify(product.reviews), // Pass reviews as JSON string
+        gallery: JSON.stringify(product.gallery),
+        reviews: JSON.stringify(product.reviews),
       },
     });
   };
 
   return (
-    <div className="my-8 relative container mx-auto px-4">
-      <h2 className="text-sm font-semibold text-purple-600 mb-1">
-        FEATURED PRODUCT
-      </h2>
-      <h2 className="text-xl font-semibold mb-4">New Arrivals</h2>
+    <div id="newArrival" className="my-8 relative container mx-auto px-4">
+      {/* Section Title */}
+      {isHomePage ? (
+        <>
+          <h2 className="text-sm font-semibold text-purple-600 mb-1">
+            FEATURED PRODUCT
+          </h2>
+          <h2 className="text-xl font-semibold mb-4">New Arrivals</h2>
+        </>
+      ) : (
+        <>
+          <h2 className="text-sm font-semibold text-purple-600 mb-1">
+            RELATED PRODUCT
+          </h2>
+          <h2 className="text-xl font-semibold mb-4">Explore More</h2>
+        </>
+      )}
 
-      <div className="absolute top-0 right-2 flex space-x-2">
+      {/* Slider Buttons */}
+      <div className="absolute top-0 right-4 flex space-x-2">
         <button
           onClick={slideLeft}
           className={`bg-gray-200 p-2 rounded-full hover:bg-gray-300 shadow ${
@@ -145,37 +162,34 @@ export default function NewArrival() {
         <button
           onClick={slideRight}
           className={`bg-gray-200 p-2 rounded-full hover:bg-gray-300 shadow ${
-            startIndex + visibleItems >= categories.length
+            startIndex + itemsPerSlide >= products.length
               ? 'cursor-not-allowed opacity-50'
               : ''
           }`}
-          disabled={startIndex + visibleItems >= categories.length}
+          disabled={startIndex + itemsPerSlide >= products.length}
         >
           <FiArrowRight size={20} />
         </button>
       </div>
 
-      <div
-        className={`grid grid-cols-${
-          isMobile ? '1' : '4'
-        } gap-4 mt-8 transition-transform`}
-      >
-        {categories.slice(startIndex, startIndex + visibleItems).map(cat => (
+      {/* Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 transition-transform">
+        {products.slice(startIndex, startIndex + itemsPerSlide).map(cat => (
           <div
             key={cat.id}
             className="p-4 border rounded-lg text-center hover:shadow-md transition-shadow cursor-pointer"
-            onClick={() => handleProductClick(cat)} // Pass product details on click
+            onClick={() => handleProductClick(cat)}
           >
             <img
               src={cat.image}
               alt={cat.name}
-              className="h-48 w-full object-cover mb-4 rounded-md"
+              className="h-auto w-full object-cover mb-4 rounded-md"
             />
             <div className="flex justify-between items-center">
               <p className="text-lg font-medium">{cat.name}</p>
               <p className="text-gray-600">BDT {cat.price}</p>
             </div>
-            <button className="px-6 py-2 border border-black w-full  text-purple-600 rounded hover:text-purple-700 mt-2">
+            <button className="px-6 py-2 border border-black w-full text-purple-600 rounded hover:text-purple-700 mt-2">
               Add to Cart
             </button>
           </div>
@@ -184,3 +198,4 @@ export default function NewArrival() {
     </div>
   );
 }
+

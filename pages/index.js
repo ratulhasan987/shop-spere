@@ -9,8 +9,12 @@ import Contact from '@/app/components/Contact';
 // import ProductCard from "@/app/components/ProductCard";
 import WomenCollection from '@/app/components/WomenCollection';
 import ProductDetails from './product/[id]';
+
 export default function Home() {
+  
+    
   return (
+
     <div className="bg-gray-50">
       <Header />
       <ProductDetails/>

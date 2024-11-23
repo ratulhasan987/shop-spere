@@ -1,6 +1,3 @@
-// import Header from '@/app/components/Header';
-// import { useRouter } from 'next/router';
-// import { useState } from 'react';
 import Contact from '@/app/components/Contact';
 import Header from '@/app/components/Header';
 import NewArrival from '@/app/components/NewArrival';
@@ -54,7 +51,7 @@ export default function ProductDetails() {
             <img
               src={productGallery[0]}
               alt={product.name}
-              className="w-full h-96 object-cover rounded-lg mb-4"
+              className="w-full md:h-96 h-auto object-cover rounded-lg mb-4"
             />
             <div className="flex space-x-4 overflow-x-auto mb-6">
               {productGallery.map((image, index) => (
@@ -70,7 +67,7 @@ export default function ProductDetails() {
 
           {/* Product Details */}
           <div className="flex-1">
-            <h1 className="text-lg w-1/2 text-center bg-purple-900 px-10 py-1 text-white rounded-lg mb-4">
+            <h1 className="text-lg md:w-1/2 w-full text-center bg-purple-900 px-10 py-1 text-white rounded-lg mb-4">
               New Arrival
             </h1>
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
@@ -170,7 +167,9 @@ export default function ProductDetails() {
           <img src="/images/reviewImage.png" alt="Reviews" className="h-36" />
         </div>
       </div>
+      <div className="py-10">
       <NewArrival />
+      </div>
       <Contact/>
     </>
   );

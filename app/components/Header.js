@@ -1,12 +1,11 @@
-
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { AiOutlineSearch, AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-
+import { useRouter } from 'next/router';
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const router = useRouter();
   // Detect scrolling
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +17,9 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const handleHomeClick = () => {
+    router.push('/');
+  };
 
   return (
     <header
@@ -26,7 +28,10 @@ export default function Header() {
       } flex justify-between items-center md:px-6 px-2 md:py-4 py-2`}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2">
+      <div
+        onClick={handleHomeClick}
+        className="flex items-center gap-2 cursor-pointer"
+      >
         <img
           src="/images/wf_1.png"
           alt="wf_1"
@@ -45,7 +50,9 @@ export default function Header() {
       >
         <ul className="flex flex-col md:flex-row md:gap-6">
           <li>
-            <a href="#" className="text-purple-600">
+            <a
+               onClick={handleHomeClick}
+               className="text-purple-600 cursor-pointer">
               Home
             </a>
           </li>
