@@ -57,14 +57,14 @@ export default function BigDeal() {
     },
     {
       id: 4,
-      image: '/images/CheckeredShirt.png',
+      image: '/images/Checkeredshirt.png',
       review: '/images/Frame 17.png',
       name: 'Checkerd Shirt',
       price: 2300,
       gallery: [
-        '/images/CheckeredShirt.png',
-        '/images/CheckeredShirt.png',
-        '/images/CheckeredShirt.png',
+        '/images/Checkeredshirt.png',
+        '/images/Checkeredshirt.png',
+        '/images/Checkeredshirt.png',
       ],
       reviews: [
         { user: 'John', rating: 4, comment: 'Great product!' },
@@ -73,11 +73,11 @@ export default function BigDeal() {
     },
     {
       id: 5,
-      image: '/images/Plazu.png',
+      image: '/images/plazu.png',
       review: '/images/Frame 17.png',
       name: 'Plazu',
       price: 2300,
-      gallery: ['/images/Plazu.png', '/images/Plazu.png', '/images/Plazu.png'],
+      gallery: ['/images/plazu.png', '/images/plazu.png', '/images/plazu.png'],
       reviews: [
         { user: 'John', rating: 4, comment: 'Great product!' },
         { user: 'Jane', rating: 4, comment: 'Comfortable and stylish.' },
